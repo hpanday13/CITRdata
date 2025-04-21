@@ -27,7 +27,6 @@ with jsonlines.open(jsonl_path) as reader:
 
 df = pd.DataFrame(data)
 
-# --- STATISTICS ---
 st.subheader("📈 Summary Statistics")
 
 col1, col2, col3 = st.columns(3)
@@ -39,7 +38,7 @@ with col2:
 with col3:
     st.metric("Unique Titles", df['title'].nunique())
 
-# More visualizations
+
 st.markdown("### 📊 Distribution of Publications by Year")
 year_chart = alt.Chart(df[df['year'].str.isnumeric()]).mark_bar().encode(
     x=alt.X('year:N', sort='-x', title='Publication Year'),
@@ -56,7 +55,6 @@ language_chart = alt.Chart(df).mark_bar().encode(
 ).properties(height=300)
 st.altair_chart(language_chart, use_container_width=True)
 
-# Show full dataset
 with st.expander("📄 View Entire Dataset"):
     st.dataframe(df, use_container_width=True)
 
